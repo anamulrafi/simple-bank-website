@@ -6,6 +6,12 @@ document.getElementById('btn-withdraw').addEventListener('click',function(){
     const newWithdrawAmountString = withdrawAmount.value;
     const newWithdrawAmount = parseFloat(newWithdrawAmountString);
     console.log(newWithdrawAmount);
+     //step: 7 clear the  wuthdraw field 
+     withdrawAmount.value = '';
+    if(isNaN(newWithdrawAmount)){
+        alert('Please Provide Valid Number');
+        return;
+    }
      // step-3:  get the current withdraw total
     // for non-input (element other than input, textarea) use innerText to get the text
     const withdrawTotalElement = document.getElementById('withdraw-total');
@@ -15,17 +21,21 @@ document.getElementById('btn-withdraw').addEventListener('click',function(){
      // step-4 : add number to set the total withdraw
      let currentWithdrawTotal = previousWithdrawTotal  + newWithdrawAmount ;
      withdrawTotalElement.innerText = currentWithdrawTotal;
-    
+   
       // Step-5: get Balance current total
     const balanceTotalElement = document.getElementById('balance-total');
     const previousBalanceTotalString = balanceTotalElement.innerText;
     const previousBalanceTotal = parseFloat(previousBalanceTotalString);
-     // step-5 : calculate current total balance
+
+    if(newWithdrawAmount > previousBalanceTotal){
+        alert ('Insufficient Balance');
+        return;
+    }
+     // step-6 : calculate current total balance
     const currentBalanceTotal = previousBalanceTotal - newWithdrawAmount;
      // set the balance total
     balanceTotalElement.innerText = currentBalanceTotal;
  
-    //step: 6 clear the  wuthdraw field 
-     withdrawAmount.value = '';
+    
      
 })
